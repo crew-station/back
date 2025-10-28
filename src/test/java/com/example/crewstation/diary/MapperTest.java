@@ -97,7 +97,7 @@ public class MapperTest {
     @Test
     @Transactional
     public void testSelectByPostId(){
-        Optional<DiaryDTO> diaryDTO = diaryMapper.selectByPostId(53L);
+        Optional<DiaryDTO> diaryDTO = diaryMapper.selectByPostId(80L);
         assertThat(diaryDTO.isPresent()).isTrue();
     }
 }
