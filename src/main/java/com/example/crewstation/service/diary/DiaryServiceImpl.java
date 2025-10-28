@@ -432,6 +432,7 @@ public class DiaryServiceImpl implements DiaryService {
                             fileDAO.saveFile(fileDTO);
                             image.setPostId(request.getPostId());
                             log.info("fileDTO{}::::::::::",fileDTO.toString());
+                            sectionDAO.update(toPostSectionVO(image));
                             sectionFileDTO.setFileId(fileDTO.getId());
                             sectionFileDTO.setImageType(type);
                             sectionFileDTO.setPostSectionId(image.getPostSectionId());
@@ -448,18 +449,19 @@ public class DiaryServiceImpl implements DiaryService {
                         }
                     } else {
                         sectionDAO.update(toPostSectionVO(image));
+                        if (image.getTags() != null) {
+//                log.info("태그가 없어");
+                            image.getTags().forEach((tag) -> {
+                                log.info("태그 추가되빈다.");
+                                tag.setPostSectionFileId(image.getFileId());
+                                postFileTagDAO.save(toPostFileTagVO(tag));
+                            });
+                        }
                     }
                     log.info(":::::::::::::{}", image);
                     log.info(":::::::::::::{}", toPostSectionVO(image).toString());
 
-                    if (image.getTags() != null) {
-//                log.info("태그가 없어");
-                        image.getTags().forEach((tag) -> {
-                            log.info("태그 추가되빈다.");
-                            tag.setPostSectionFileId(image.getFileId());
-                            postFileTagDAO.save(toPostFileTagVO(tag));
-                        });
-                    }
+
                 });
         if (request.getThumbnail() > 0 && request.getNewThumbnail() > 0) {
             log.info("기존 :::{}", request.getThumbnail());
