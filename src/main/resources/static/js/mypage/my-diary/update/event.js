@@ -959,6 +959,10 @@ complteBtn.addEventListener("click", (e) => {
             console.log("기존 이미지");
             console.log(newFileIndex);
             textarea.name = `oldImages[${oldCount}].postContent`;
+            const main = document.createElement("input");
+            main.name = `oldImages[${oldCount}].thumbnail`;
+            main.value = data.classList.contains("thumbnail") ? "main" : "sub";
+            form.appendChild(main);
             const ids = data.dataset.fileid;
             const fileInput = document.createElement("input");
             console.log(ids)
