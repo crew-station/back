@@ -618,7 +618,7 @@ public class DiaryServiceImpl implements DiaryService {
         }
 
 
-        return diaryTransactionService.getDiary(postId);
+        return diaryTransactionService.getDiary(postId,customUserDetails);
     }
 
     @Override

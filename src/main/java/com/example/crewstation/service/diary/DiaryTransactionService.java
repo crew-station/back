@@ -63,7 +63,7 @@ public class DiaryTransactionService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public DiaryDetailDTO getDiary (Long postId) {
+    public DiaryDetailDTO getDiary (Long postId,CustomUserDetails customUserDetails) {
         DiaryDetailDTO diaryDetailDTO = new DiaryDetailDTO();
         postDAO.updateReadCount(postId);
         List<CountryDTO> countries = diaryCountryDAO.findCountryByPostId(postId);
@@ -72,6 +72,12 @@ public class DiaryTransactionService {
 
         byPostId.ifPresent(diaryDTO -> {
             diaryDTO.setDiaryLikeCount(diaryDAO.findLikeCountByPostId(postId));
+            if (customUserDetails != null) {
+                diaryDTO.setUserId(customUserDetails.getId());
+                Long likeId = likeDAO.isLikeByPostIdAndMemberId(diaryDTO);
+                diaryDTO.setUserId(Objects.equals(diaryDTO.getUserId(), diaryDTO.getMemberId()) ? customUserDetails.getId() : null);
+                diaryDTO.setLikeId(likeId);
+            }
             if(diaryDTO.getMemberFilePath() != null){
                 diaryDTO.setMemberFilePath(s3Service.getPreSignedUrl(diaryDTO.getMemberFilePath(), Duration.ofMinutes(5)));
             }
