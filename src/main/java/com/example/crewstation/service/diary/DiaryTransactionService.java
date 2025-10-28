@@ -63,7 +63,7 @@ public class DiaryTransactionService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public DiaryDetailDTO getDiary (Long postId, CustomUserDetails customUserDetails) {
+    public DiaryDetailDTO getDiary (Long postId) {
         DiaryDetailDTO diaryDetailDTO = new DiaryDetailDTO();
         postDAO.updateReadCount(postId);
         List<CountryDTO> countries = diaryCountryDAO.findCountryByPostId(postId);
@@ -76,11 +76,6 @@ public class DiaryTransactionService {
             }
             diaryDTO.setRelativeDate(DateUtils.toRelativeTime(diaryDTO.getCreatedDatetime()));
 
-            if (customUserDetails != null) {
-                diaryDTO.setUserId(Objects.equals(customUserDetails.getId(), diaryDTO.getMemberId()) ? customUserDetails.getId() : null);
-                Long likeId = likeDAO.isLikeByPostIdAndMemberId(diaryDTO);
-                diaryDTO.setLikeId(likeId);
-            }
             log.info("유저 아이디{}",diaryDTO.getUserId());
         });
         diaryDetailDTO.setCountries(countries);

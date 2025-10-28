@@ -587,6 +587,13 @@ public class DiaryServiceImpl implements DiaryService {
         DiaryDetailDTO cached = diaryRedisTemplate.opsForValue().get("diary::diary_" + postId);
         log.info("cached :::::::::: {}", cached);
         if (cached != null) {
+            DiaryDTO  diaryDTO = cached.getDiary();
+            if (customUserDetails != null) {
+                diaryDTO.setUserId(Objects.equals(customUserDetails.getId(), diaryDTO.getMemberId()) ? customUserDetails.getId() : null);
+                Long likeId = likeDAO.isLikeByPostIdAndMemberId(diaryDTO);
+                diaryDTO.setLikeId(likeId);
+            }
+
             List<SectionDTO> sections = sectionDAO.findSectionsByPostId(postId);
             sections.forEach(section -> {
                 log.info("{}", section.getFileId());
@@ -605,11 +612,12 @@ public class DiaryServiceImpl implements DiaryService {
 
             });
             cached.setSections(sections);
+            cached.setDiary(diaryDTO);
             return cached;
         }
 
 
-        return diaryTransactionService.getDiary(postId, customUserDetails);
+        return diaryTransactionService.getDiary(postId);
     }
 
     @Override
