@@ -301,7 +301,7 @@ public class DiaryServiceImpl implements DiaryService {
 
 
     @Transactional(rollbackFor = Exception.class)
-//    @LogStatus
+    @LogStatus
     public void update(PostDiaryDetailTagDTO request) {
 
         FileDTO fileDTO = new FileDTO();
