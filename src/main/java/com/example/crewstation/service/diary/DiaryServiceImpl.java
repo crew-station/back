@@ -289,7 +289,7 @@ public class DiaryServiceImpl implements DiaryService {
 
 
     @Transactional(rollbackFor = Exception.class)
-//    @LogStatus
+    @LogStatus
     public void update(PostDiaryDetailTagDTO request) {
 
         FileDTO fileDTO = new FileDTO();
@@ -442,7 +442,7 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-//    @LogStatus
+    @LogStatus
     public void write(PostDiaryDetailTagDTO request) {
         FileDTO fileDTO = new FileDTO();
         FilePostSectionDTO sectionFileDTO = new FilePostSectionDTO();
@@ -542,7 +542,7 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-//    @LogReturnStatus
+    @LogReturnStatus
     @Transactional(rollbackFor = Exception.class)
     public DiaryDetailDTO getDiary(Long postId, CustomUserDetails customUserDetails) {
         DiaryDetailDTO cached = diaryRedisTemplate.opsForValue().get("diary::diary_" + postId);

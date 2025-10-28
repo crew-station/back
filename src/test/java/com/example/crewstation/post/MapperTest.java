@@ -24,8 +24,9 @@ public class MapperTest {
     private PostMapper postMapper;
 
     @Test
+    @Transactional
     public void testInsertPostReport() {
-        Long reportId = 1L;
+        Long reportId = 49L;
         Long postId = 1L;
         postMapper.insertPostReport(reportId,postId);
     }

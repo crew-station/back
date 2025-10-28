@@ -54,8 +54,10 @@ public class DaoTest {
     public void testSelectAllByKeyword(){
         Search search = new Search();
         search.setKeyword("호주");
+        search.setCategory("");
         Criteria criteria = new Criteria(1,2);
         String order = "diary_like_count";
+        search.setOrderType(order);
         List<DiaryDTO> diaryDTOS = diaryDAO.findAllByKeyword(criteria, search);
         diaryDTOS.stream().map(DiaryDTO::toString).forEach(log::info);
     }

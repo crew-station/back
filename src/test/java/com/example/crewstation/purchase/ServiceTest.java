@@ -21,8 +21,7 @@ import java.util.List;
 public class ServiceTest {
     @Autowired
     private PurchaseService purchaseService;
-    @Autowired
-    private PurchaseDTO purchaseDTO;
+
 
     @Test
     public void testGetPurchases(){
@@ -37,14 +36,14 @@ public class ServiceTest {
 
     @Test
     public void testGetPurchase(){
-        purchaseService.getPurchase(2L);
+        purchaseService.getPurchase(10L);
     }
 
 
     @Test
     @Transactional
     public void testWrite(){
-        PurchaseDTO purchase = purchaseDTO;
+        PurchaseDTO purchase = new PurchaseDTO();
         purchase.setPurchaseContent("test content");
         purchase.setPurchaseLimitTime(12);
         purchase.setPostTitle("test title");
@@ -66,7 +65,7 @@ public class ServiceTest {
     @Test
     @Transactional
     public void testUpdate(){
-        PurchaseDTO purchase = purchaseDTO;
+        PurchaseDTO purchase = new PurchaseDTO();
         purchase.setPurchaseContent("test content");
         purchase.setPurchaseLimitTime(12);
         purchase.setPostTitle("test title");

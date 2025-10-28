@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Slf4j
@@ -14,10 +15,11 @@ public class MemberFileMapperTests {
     private MemberFileMapper memberFileMapper;
 
     @Test
+    @Transactional
     public void testInsertFile() {
         MemberFileVO memberFileVO = MemberFileVO.builder()
                 .fileId(1L)
-                .memberId(9L)
+                .memberId(1L)
                 .build();
         memberFileMapper.insert(memberFileVO);
     }
