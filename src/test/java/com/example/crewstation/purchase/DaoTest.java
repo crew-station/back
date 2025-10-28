@@ -41,7 +41,7 @@ public class DaoTest {
     }
     @Test
     public void testFindByPostId(){
-        log.info("testFindByPostId {}", purchaseDAO.findByPostId(3L));
+        log.info("testFindByPostId {}", purchaseDAO.findByPostId(76L));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class DaoTest {
     }
 
     @Test
-//    @Transactional
+    @Transactional
     public void testUpdatePurchaseProductCount(){
         boolean a = purchaseDAO.updatePurchaseProductCount(1L,-1);
         log.info("updatePurchaseProductCount {}", a);

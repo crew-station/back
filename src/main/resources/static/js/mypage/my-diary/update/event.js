@@ -394,7 +394,7 @@ const addPairWithFile = () => {
     block = sampleBlock.cloneNode(true);
     block.querySelector(".content-del").style.display = "block";
     resetBlock(block);
-    fileBuffer.push("");
+    console.log(fileBuffer.length+"입니다.")
     // }
     block.dataset.idx = String(idx);
     const beforeBlk = findBlockBefore(idx);
@@ -549,8 +549,8 @@ contentList?.addEventListener("click", (e) => {
                 delete block.dataset.fileid;
             }
             if (block.dataset?.postsectionid) {
-                deleteSections.push(block.dataset.postsectionid)
-                delete block.dataset.postsectionid;
+                // deleteSections.push(block.dataset.postsectionid)
+                // delete block.dataset.postsectionid;
             }
 
             previewIn(block, url);
@@ -914,8 +914,10 @@ complteBtn.addEventListener("click", (e) => {
             console.log(fileBuffer)
             const file = fileBuffer[newFileIndex];
             const image = document.createElement("input");
+
             image.type = "file";
             image.name = `images[${count}].image`;
+
             const dt = new DataTransfer();
             if (file === '') {
                 image.value = ''; // 파일 input 초기화
@@ -962,6 +964,20 @@ complteBtn.addEventListener("click", (e) => {
             fileInput.name = `oldImages[${oldCount}].fileId`;
             fileInput.value = ids ? ids : -1;
             form.appendChild(fileInput);
+            const fileSectionInput = document.createElement("input");
+            fileSectionInput.name= `oldImages[${oldCount}].image`;
+            fileSectionInput.type="file";
+            const file = fileBuffer[oldCount];
+            console.log(file);
+            console.log("출력된다::::::::::::")
+            const dt = new DataTransfer();
+            if (file === '') {
+                fileSectionInput.value = ''; // 파일 input 초기화
+            } else {
+                dt.items.add(file);
+                fileSectionInput.files = dt.files;
+            }
+            form.appendChild(fileSectionInput);
             const inputSectionId = document.createElement("input");
             inputSectionId.value = fileId;
             inputSectionId.name = `oldImages[${oldCount}].postSectionId`;
@@ -1105,3 +1121,9 @@ setInterval(()=>{
     console.log(thumbnail);
     console.log(newThumbnail);
 },2000)
+
+
+const oldCount = document.querySelectorAll("li.post-img-content-wrapper").length;
+for (let i = 0; i < oldCount; i++) {
+    fileBuffer.push("");
+}

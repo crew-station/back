@@ -16,7 +16,7 @@ public class DaoTest {
     @Test
     @Transactional
     public void testInsertPayment() {
-        alarmDAO.savePaymentAlarm(2L);
+        alarmDAO.savePaymentAlarm(21L);
     }
 
     @Test

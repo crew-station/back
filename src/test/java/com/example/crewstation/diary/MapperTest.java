@@ -58,6 +58,7 @@ public class MapperTest {
         Criteria criteria = new Criteria(1,2);
 
         String order = "diary_like_count";
+        search.setOrderType(order);
         List<DiaryDTO> diaryDTOS = diaryMapper.selectAllByKeyword(criteria, search);
         diaryDTOS.stream().map(DiaryDTO::toString).forEach(log::info);
     }
@@ -96,7 +97,7 @@ public class MapperTest {
     @Test
     @Transactional
     public void testSelectByPostId(){
-        Optional<DiaryDTO> diaryDTO = diaryMapper.selectByPostId(53L);
+        Optional<DiaryDTO> diaryDTO = diaryMapper.selectByPostId(80L);
         assertThat(diaryDTO.isPresent()).isTrue();
     }
 }
