@@ -71,6 +71,7 @@ public class DiaryTransactionService {
 
 
         byPostId.ifPresent(diaryDTO -> {
+            diaryDTO.setDiaryLikeCount(diaryDAO.findLikeCountByPostId(postId));
             if(diaryDTO.getMemberFilePath() != null){
                 diaryDTO.setMemberFilePath(s3Service.getPreSignedUrl(diaryDTO.getMemberFilePath(), Duration.ofMinutes(5)));
             }

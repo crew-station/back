@@ -587,13 +587,14 @@ public class DiaryServiceImpl implements DiaryService {
         DiaryDetailDTO cached = diaryRedisTemplate.opsForValue().get("diary::diary_" + postId);
         log.info("cached :::::::::: {}", cached);
         if (cached != null) {
-            DiaryDTO  diaryDTO = cached.getDiary();
+            DiaryDTO diaryDTO = cached.getDiary();
+            diaryDTO.setDiaryLikeCount(diaryDAO.findLikeCountByPostId(postId));
             if (customUserDetails != null) {
-                diaryDTO.setUserId(Objects.equals(customUserDetails.getId(), diaryDTO.getMemberId()) ? customUserDetails.getId() : null);
+                diaryDTO.setUserId(customUserDetails.getId());
                 Long likeId = likeDAO.isLikeByPostIdAndMemberId(diaryDTO);
+                diaryDTO.setUserId(Objects.equals(diaryDTO.getUserId(), diaryDTO.getMemberId()) ? customUserDetails.getId() : null);
                 diaryDTO.setLikeId(likeId);
             }
-
             List<SectionDTO> sections = sectionDAO.findSectionsByPostId(postId);
             sections.forEach(section -> {
                 log.info("{}", section.getFileId());
