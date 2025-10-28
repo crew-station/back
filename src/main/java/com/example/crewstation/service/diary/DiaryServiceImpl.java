@@ -445,6 +445,7 @@ public class DiaryServiceImpl implements DiaryService {
                             fileDAO.saveFile(fileDTO);
                             image.setPostId(request.getPostId());
                             log.info("fileDTO{}::::::::::",fileDTO.toString());
+                            sectionDAO.update(toPostSectionVO(image));
                             sectionFileDTO.setFileId(fileDTO.getId());
                             sectionFileDTO.setImageType(type);
                             sectionFileDTO.setPostSectionId(image.getPostSectionId());
@@ -461,18 +462,19 @@ public class DiaryServiceImpl implements DiaryService {
                         }
                     } else {
                         sectionDAO.update(toPostSectionVO(image));
+                        if (image.getTags() != null) {
+//                log.info("태그가 없어");
+                            image.getTags().forEach((tag) -> {
+                                log.info("태그 추가되빈다.");
+                                tag.setPostSectionFileId(image.getFileId());
+                                postFileTagDAO.save(toPostFileTagVO(tag));
+                            });
+                        }
                     }
                     log.info(":::::::::::::{}", image);
                     log.info(":::::::::::::{}", toPostSectionVO(image).toString());
 
-                    if (image.getTags() != null) {
-//                log.info("태그가 없어");
-                        image.getTags().forEach((tag) -> {
-                            log.info("태그 추가되빈다.");
-                            tag.setPostSectionFileId(image.getFileId());
-                            postFileTagDAO.save(toPostFileTagVO(tag));
-                        });
-                    }
+
                 });
         if (request.getThumbnail() > 0 && request.getNewThumbnail() > 0) {
             log.info("기존 :::{}", request.getThumbnail());
@@ -598,6 +600,14 @@ public class DiaryServiceImpl implements DiaryService {
         DiaryDetailDTO cached = diaryRedisTemplate.opsForValue().get("diary::diary_" + postId);
         log.info("cached :::::::::: {}", cached);
         if (cached != null) {
+            DiaryDTO diaryDTO = cached.getDiary();
+            diaryDTO.setDiaryLikeCount(diaryDAO.findLikeCountByPostId(postId));
+            if (customUserDetails != null) {
+                diaryDTO.setUserId(customUserDetails.getId());
+                Long likeId = likeDAO.isLikeByPostIdAndMemberId(diaryDTO);
+                diaryDTO.setUserId(Objects.equals(diaryDTO.getUserId(), diaryDTO.getMemberId()) ? customUserDetails.getId() : null);
+                diaryDTO.setLikeId(likeId);
+            }
             List<SectionDTO> sections = sectionDAO.findSectionsByPostId(postId);
             sections.forEach(section -> {
                 log.info("{}", section.getFileId());
@@ -616,11 +626,12 @@ public class DiaryServiceImpl implements DiaryService {
 
             });
             cached.setSections(sections);
+            cached.setDiary(diaryDTO);
             return cached;
         }
 
 
-        return diaryTransactionService.getDiary(postId, customUserDetails);
+        return diaryTransactionService.getDiary(postId);
     }
 
     @Override

@@ -176,7 +176,8 @@
                     <div class="sticky-wrap">
                         <button id="postId" class="sticky-like-button" th:attr="data-post=${diary.diary.postId}">
                                 <span class="like-icon">
-                                    <span class="like-before" th:classappend="${diary.diary.likeId} ? 'active': ''" ></span>
+
+                                    <span class="like-before" th:classappend="${diary.diary.likeId != null} ? 'active': ''" ></span>
                                 </span>
                             <span class="like-total" th:text="${diary.diary.diaryLikeCount}">1</span>
                         </button>

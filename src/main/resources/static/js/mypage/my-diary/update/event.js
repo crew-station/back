@@ -897,6 +897,7 @@ complteBtn.addEventListener("click", (e) => {
     let oldCount = 0;
     let tagCount = 0;
     document.querySelectorAll(".post-img-content-wrapper").forEach((data) => {
+        tagCount = 0;
         console.log(data)
         const idx = +data.dataset.idx;
         newFileIndex = idx;
