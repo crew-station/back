@@ -36,6 +36,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -53,6 +54,7 @@ public class MemberServiceImpl implements MemberService {
     private final CrewDAO crewDAO;
     private final CountryDAO countryDAO;
     private final DiaryDAO diaryDAO;
+    private final RedisTemplate redisTemplate;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -405,6 +407,16 @@ public class MemberServiceImpl implements MemberService {
 
         dto.setProfileImageUrl(imageUrl);
         return dto;
+    }
+
+
+    @Override
+    public void deleteCache(String keyName){
+        String name = keyName+"*";
+        Set<String> keys = redisTemplate.keys(name);
+        for (String key : keys) {
+            redisTemplate.delete(key);
+        }
     }
 
 

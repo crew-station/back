@@ -124,5 +124,7 @@ public interface MemberService {
                 .memberId(memberfileDTO.getMemberId())
                 .build();
     }
+
+    public void deleteCache (String keyName);
 }
 

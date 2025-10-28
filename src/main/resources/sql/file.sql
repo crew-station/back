@@ -9,14 +9,5 @@ create table tbl_file
     updated_datetime timestamp default now()
 );
 
-
-alter table tbl_file
-    add column file_size varchar(255);
-
-alter table tbl_file alter column file_size set not null;
-
-select * from tbl_file;
-
-
-delete from tbl_file
-where id = 19;
+insert into tbl_file (file_origin_name, file_path, file_name, file_size)
+values ('1','../../','1','1');
