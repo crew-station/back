@@ -23,7 +23,8 @@ public class DiaryMapperTests {
     @Test
     public void selectDiaryListTest() {
         DiaryDTO diaryDTO = new DiaryDTO();
-        List<DiaryDTO> dtos =  diaryMapper.selectDiaryList(4L,4);
+//        List<DiaryDTO> dtos =  diaryMapper.selectDiaryList(4L,4);
+        List<DiaryDTO> dtos =  diaryMapper.selectDiaryList(1L,4);
         log.info("diaryDTO={}", dtos);
         }
     }
