@@ -914,8 +914,10 @@ complteBtn.addEventListener("click", (e) => {
             console.log(fileBuffer)
             const file = fileBuffer[newFileIndex];
             const image = document.createElement("input");
+
             image.type = "file";
             image.name = `images[${count}].image`;
+
             const dt = new DataTransfer();
             if (file === '') {
                 image.value = ''; // 파일 input 초기화
@@ -1017,7 +1019,7 @@ complteBtn.addEventListener("click", (e) => {
         text += `<input type="hidden" name="thumbnail" value="${thumbnail}">`
         text += `<input type="hidden" name="newThumbnail" value="${newThumbnail}">`
         deleteWrap.innerHTML = text;
-        form.submit();
+        // form.submit();
 
     });
 
