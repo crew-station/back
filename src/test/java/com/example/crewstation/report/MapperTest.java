@@ -24,6 +24,7 @@ public class MapperTest {
     private ReportMapper reportMapper;
 
     @Test
+    @Transactional
     public void testInsertReport() {
         ReportDTO reportDTO = new ReportDTO();
         reportDTO.setReportContent("불법 물품 같아요");

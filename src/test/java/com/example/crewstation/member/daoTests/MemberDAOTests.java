@@ -24,11 +24,12 @@ public class MemberDAOTests {
     public PasswordEncoder passwordEncoder;
 
     @Test
+    @Transactional
     public void testInsert() {
         MemberVO memberVO = MemberVO.builder()
                 .memberName("test1")
                 .memberPhone("01011111111")
-                .memberEmail("test1@gmail.com")
+                .memberEmail("test12312311@gmail.com")
                 .memberBirth("20000101")
                 .memberGender(Gender.FEMALE)
                 .memberPassword("1234")
@@ -85,11 +86,12 @@ public class MemberDAOTests {
     }
 
     @Test
+    @Transactional
     public void testjoin() {
         MemberVO memberVO = MemberVO.builder()
                 .memberName("test1")
                 .memberPhone("01011111111")
-                .memberEmail("test1@gmail.com")
+                .memberEmail("test112ss3123@gmail.com")
                 .memberBirth("20000101")
                 .memberPassword(passwordEncoder.encode("test1234"))
                 .memberProvider(MemberProvider.CREWSTATION)

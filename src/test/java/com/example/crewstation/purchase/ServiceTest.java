@@ -21,6 +21,10 @@ import java.util.List;
 public class ServiceTest {
     @Autowired
     private PurchaseService purchaseService;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 89866d1f5864673d41380b3876036a71a968f818
 
     @Test
     public void testGetPurchases(){

@@ -41,7 +41,7 @@ public class DaoTest {
     }
     @Test
     public void testFindByPostId(){
-        log.info("testFindByPostId {}", purchaseDAO.findByPostId(3L));
+        log.info("testFindByPostId {}", purchaseDAO.findByPostId(76L));
     }
 
     @Test

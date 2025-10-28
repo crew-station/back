@@ -20,6 +20,7 @@ public class DaoTest {
     private PostDAO postDAO;
 
     @Test
+    @Transactional
     public void testSavePostReport(){
         postDAO.savePostReport(49L,1L);
     }
