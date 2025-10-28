@@ -60,10 +60,9 @@ public class DiaryController {
     public RedirectView modify(@PathVariable Long postId, PostDiaryDetailTagDTO request){
         log.info("::::::::::{}",request);
 //        DiaryDetail/DTO diary = diaryService.getDiary(postId, customUserDetails);
-//        diaryService.update(request);
+        diaryService.update(request);
 //        model.addAttribute("diary",diary);
-//        return new RedirectView("/diaries/detail/"+postId);
-        return null;
+        return new RedirectView("/diaries/detail/"+postId);
     }
 
 

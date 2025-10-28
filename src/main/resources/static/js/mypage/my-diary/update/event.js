@@ -549,8 +549,8 @@ contentList?.addEventListener("click", (e) => {
                 delete block.dataset.fileid;
             }
             if (block.dataset?.postsectionid) {
-                deleteSections.push(block.dataset.postsectionid)
-                delete block.dataset.postsectionid;
+                // deleteSections.push(block.dataset.postsectionid)
+                // delete block.dataset.postsectionid;
             }
 
             previewIn(block, url);
@@ -964,6 +964,20 @@ complteBtn.addEventListener("click", (e) => {
             fileInput.name = `oldImages[${oldCount}].fileId`;
             fileInput.value = ids ? ids : -1;
             form.appendChild(fileInput);
+            const fileSectionInput = document.createElement("input");
+            fileSectionInput.name= `oldImages[${oldCount}].image`;
+            fileSectionInput.type="file";
+            const file = fileBuffer[oldCount];
+            console.log(file);
+            console.log("출력된다::::::::::::")
+            const dt = new DataTransfer();
+            if (file === '') {
+                fileSectionInput.value = ''; // 파일 input 초기화
+            } else {
+                dt.items.add(file);
+                fileSectionInput.files = dt.files;
+            }
+            form.appendChild(fileSectionInput);
             const inputSectionId = document.createElement("input");
             inputSectionId.value = fileId;
             inputSectionId.name = `oldImages[${oldCount}].postSectionId`;
@@ -1019,7 +1033,7 @@ complteBtn.addEventListener("click", (e) => {
         text += `<input type="hidden" name="thumbnail" value="${thumbnail}">`
         text += `<input type="hidden" name="newThumbnail" value="${newThumbnail}">`
         deleteWrap.innerHTML = text;
-        // form.submit();
+        form.submit();
 
     });
 
