@@ -427,11 +427,7 @@ public class DiaryServiceImpl implements DiaryService {
                     if (image.getFileId() == -1 && image.getImage() != null) {
                         MultipartFile file = image.getImage();
                         try {
-                            Type type = Type.SUB;
-                            if (check[0]) {
-                                type = Type.MAIN;
-                                check[0] = false;
-                            }
+
                             String s3Key = s3Service.uploadPostFile(file, getPath());
                             String originalFileName = file.getOriginalFilename();
                             String extension = "";
@@ -447,7 +443,7 @@ public class DiaryServiceImpl implements DiaryService {
                             log.info("fileDTO{}::::::::::",fileDTO.toString());
                             sectionDAO.update(toPostSectionVO(image));
                             sectionFileDTO.setFileId(fileDTO.getId());
-                            sectionFileDTO.setImageType(type);
+                            sectionFileDTO.setImageType(image.getThumbnail());
                             sectionFileDTO.setPostSectionId(image.getPostSectionId());
                             FilePostSectionVO vo = toSectionFileVO(sectionFileDTO);
                             filePostSectionDAO.save(vo);
