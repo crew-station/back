@@ -16,9 +16,10 @@ public class FileMapperTests {
     private FileMapper fileMapper;
 
     @Test
+    @Transactional
     public void testInsertFile() {
         FileVO fileVO = FileVO.builder()
-                .fileSize("12MB")
+                .fileSize("12")
                 .filePath("../../test")
                 .fileOriginName("test")
                 .fileName("test")
@@ -31,7 +32,7 @@ public class FileMapperTests {
     public void testInsert(){
         FileDTO fileDTO = new FileDTO();
         fileDTO.setFileName("test");
-        fileDTO.setFileSize("12MB");
+        fileDTO.setFileSize("12");
         fileDTO.setFileOriginName("test");
         fileDTO.setFilePath("../../test");
 
