@@ -21,7 +21,7 @@ public class DaoTest {
 
     @Test
     public void testSavePostReport(){
-        postDAO.savePostReport(2L,1L);
+        postDAO.savePostReport(49L,1L);
     }
 
     @Test

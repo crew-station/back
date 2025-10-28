@@ -79,7 +79,7 @@ public class DaoTest {
     }
 
     @Test
-//    @Transactional
+    @Transactional
     public void testUpdatePurchaseProductCount(){
         boolean a = purchaseDAO.updatePurchaseProductCount(1L,-1);
         log.info("updatePurchaseProductCount {}", a);

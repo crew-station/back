@@ -29,7 +29,7 @@ public class MemberMapperTests {
         MemberVO memberVO = MemberVO.builder()
                 .memberName("test")
                 .memberPhone("01012341234")
-                .memberEmail("test@gmail.com")
+                .memberEmail("test23123@gmail.com")
                 .memberBirth("20000101")
                 .memberGender(Gender.FEMALE)
                 .memberPassword("1234")

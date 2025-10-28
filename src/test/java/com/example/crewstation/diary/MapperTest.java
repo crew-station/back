@@ -58,6 +58,7 @@ public class MapperTest {
         Criteria criteria = new Criteria(1,2);
 
         String order = "diary_like_count";
+        search.setOrderType(order);
         List<DiaryDTO> diaryDTOS = diaryMapper.selectAllByKeyword(criteria, search);
         diaryDTOS.stream().map(DiaryDTO::toString).forEach(log::info);
     }

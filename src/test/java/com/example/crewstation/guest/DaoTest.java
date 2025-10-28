@@ -33,7 +33,8 @@ public class DaoTest {
         paymentStatusDTO.setMemberId(memberDTO.getId());
         paymentStatusDTO.setGuestOrderNumber("test");
         paymentStatusDTO.setAddress("test");
-        paymentStatusDTO.setMemberPhone("test");
+        paymentStatusDTO.setGuestPassword("1234");
+        paymentStatusDTO.setMemberPhone("01012341234");
         paymentStatusDTO.setAddressDetail("test");
         paymentStatusDTO.setAddressZipCode("test");
         GuestVO vo = paymentService.toVO(paymentStatusDTO);

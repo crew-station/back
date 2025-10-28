@@ -380,7 +380,7 @@ public class DiaryServiceImpl implements DiaryService {
 
                 } else {
                     log.info("어디로 들어오니2");
-                    image.setPostId(post.getPostId());
+                    image.setPostId(request.getPostId());
                     sectionDAO.saveDiary(image);
                 }
             } catch (Exception e) {
