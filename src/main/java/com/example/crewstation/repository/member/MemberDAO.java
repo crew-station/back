@@ -1,5 +1,6 @@
 package com.example.crewstation.repository.member;
 
+import com.example.crewstation.common.enumeration.MemberProvider;
 import com.example.crewstation.domain.member.MemberVO;
 import com.example.crewstation.dto.member.*;
 import com.example.crewstation.mapper.member.MemberMapper;
@@ -44,7 +45,7 @@ public class MemberDAO {
     }
 
     //    sns 회원 조회
-    public Optional<MemberDTO> findBySnsEmail(String snsEmail, String provider) {
+    public Optional<MemberDTO> findBySnsEmail(String snsEmail, MemberProvider provider) {
         return memberMapper.selectMemberBySnsEmail(snsEmail, provider);
     }
 
