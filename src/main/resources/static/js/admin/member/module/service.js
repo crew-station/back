@@ -2,7 +2,6 @@ const memberService = (() => {
     const safeJson = async (res) => {
         if (res.status === 204) return null;
         const text = await res.text();
-        // console.log('[DEBUG]', res.status, text); // 필요시 해제
         return text ? JSON.parse(text) : null;
     };
 
