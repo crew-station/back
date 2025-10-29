@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class MapperTests {
     }
 
     @Test
+    @Transactional
     public void insertBannerTest() {
         BannerDTO banner = new BannerDTO();
         banner.setBannerOrder(1);
@@ -34,11 +36,12 @@ public class MapperTests {
     }
 
     @Test
+    @Transactional
     public void insertBannerFileTest() {
-        Long testFileId = 52L;
+        Long testFileId = 119L;
         Long testBannerId = 1L;
 
-        bannerMapper.insertBannerFile(testFileId, testBannerId);
+        bannerMapper.insertBannerFile(testBannerId,testFileId);
 
         log.info("fileId: {}, bannerId: {}", testFileId, testBannerId);
     }

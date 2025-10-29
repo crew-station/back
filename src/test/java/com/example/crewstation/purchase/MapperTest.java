@@ -45,7 +45,7 @@ public class MapperTest {
 
     @Test
     public void testSelectByPostId() {
-        Optional<PurchaseDTO> purchaseDetailDTO = purchaseMapper.selectByPostId(1L);
+        Optional<PurchaseDTO> purchaseDetailDTO = purchaseMapper.selectByPostId(76L);
         assertThat(purchaseDetailDTO).isPresent();
 //        log.info("testSelectByPostId {}", );
     }
@@ -87,6 +87,6 @@ public class MapperTest {
     @Transactional
     public void testUpdatePurchaseProductCount(){
 
-        assertThat(purchaseMapper.updatePurchaseProductCount(1L,-1)).isNull();
+        assertThat(purchaseMapper.updatePurchaseProductCount(1L,-1)).isTrue();
     }
 }

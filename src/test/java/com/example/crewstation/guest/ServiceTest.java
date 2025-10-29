@@ -16,8 +16,8 @@ public class ServiceTest {
     @Test
     public void testSelect() {
         GuestDTO guestDTO = new GuestDTO();
-        guestDTO.setGuestPhone("test");
-        guestDTO.setGuestOrderNumber("test");
+        guestDTO.setGuestPhone("01031128286");
+        guestDTO.setGuestOrderNumber("2025101709584705791");
 
         guestService.login(guestDTO);
         log.info("guest {}", guestService.login(guestDTO));

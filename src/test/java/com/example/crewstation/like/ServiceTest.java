@@ -27,7 +27,7 @@ public class ServiceTest {
         LikeDTO likeDTO = new LikeDTO();
         likeDTO.setPostId(30L);
         likeDTO.setMemberId(1L);
-        likeService.like(1L,userDetails);
+        likeService.like(30L,userDetails);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ServiceTest {
         likeDTO.setId(1L);
         likeDTO.setPostId(30L);
         likeDTO.setMemberId(1L);
-        likeService.unlike(1L,userDetails);
+        likeService.unlike(30L,userDetails);
     }
 
 }
