@@ -28,7 +28,7 @@ public interface MemberMapper {
     public Optional<MemberDTO> selectMemberByMemberEmail(String memberEmail);
 
 //    sns 조회
-    public Optional<MemberDTO> selectMemberBySnsEmail(String snsEmail);
+    public Optional<MemberDTO> selectMemberBySnsEmail(@Param("memberSocialEmail") String memberSocialEmail, @Param("provider") String provider);
 
 //  게스트 추가
     public void insertGuest(MemberDTO memberDTO);

@@ -44,8 +44,8 @@ public class MemberDAO {
     }
 
     //    sns 회원 조회
-    public Optional<MemberDTO> findBySnsEmail(String snsEmail) {
-        return memberMapper.selectMemberBySnsEmail(snsEmail);
+    public Optional<MemberDTO> findBySnsEmail(String snsEmail, String provider) {
+        return memberMapper.selectMemberBySnsEmail(snsEmail, provider);
     }
 
     //  게스트 추가
