@@ -75,8 +75,8 @@ public class MemberMapperTests {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setMemberSocialEmail("test123");
 
-        memberMapper.selectMemberBySnsEmail("test123");
-        log.info(String.valueOf(memberMapper.selectMemberBySnsEmail("test123")));
+        memberMapper.selectMemberBySnsEmail("test123", "naver");
+        log.info(String.valueOf(memberMapper.selectMemberBySnsEmail("test123", "naver")));
     }
 
     @Test
