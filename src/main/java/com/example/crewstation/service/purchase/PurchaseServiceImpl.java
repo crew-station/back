@@ -78,28 +78,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseCriteriaDTO;
     }
 
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    @Cacheable(value = "purchases", key = "'purchases_' + #postId")
-//    @LogReturnStatus
-//    public PurchaseDTO getPurchase(Long postId) {
-//        purchaseDAO.increaseReadCount(postId);
-//        Optional<PurchaseDTO> purchaseDetail = purchaseDAO.findByPostId(postId);
-//        PurchaseDTO purchaseDTO = purchaseDetail.orElseThrow(PurchaseNotFoundException::new);
-////
-////        List<SectionDTO> sections = sectionDAO.findSectionsByPostId(postId);
-////        sections.forEach(section -> {
-////            section.setFilePath(s3Service.getPreSignedUrl(section.getFilePath(), Duration.ofMinutes(5)));
-////        });
-////
-////        sections.sort(Comparator.comparing(SectionDTO::getImageType));
-////        log.info(sections.toString());
-//        log.info("{}",purchaseDTO.getPrice());
-//        purchaseDTO.setPurchaseProductPrice(PriceUtils.formatMoney(purchaseDTO.getPrice()));
-//        purchaseDTO.setLimitDateTime(DateUtils.calcLimitDateTime(purchaseDTO.getUpdatedDatetime(), purchaseDTO.getPurchaseLimitTime()));
-////        purchaseDTO.setSections(sections);
-//        return purchaseDTO;
-//    }
+
     @Override
     @LogReturnStatus
     public PurchaseDTO getPurchase(Long id) {
@@ -169,15 +148,12 @@ public class PurchaseServiceImpl implements PurchaseService {
             }
 
         });
-        if(redisTemplate.opsForValue().get("gifts") !=null){
-            redisTemplate.delete("gifts");
-        }
+
 
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-//    @CachePut(value = "purchases", key = "'purchases_' + #purchaseDTO.postId")
     @LogReturnStatus
     public PurchaseDTO update(PurchaseDTO purchaseDTO, Long[] deleteFiles, List<MultipartFile> multipartFiles) {
         FileDTO fileDTO = new FileDTO();
@@ -255,21 +231,14 @@ public class PurchaseServiceImpl implements PurchaseService {
         if(purchaseRedisTemplate.opsForValue().get("purchase::purchases_" + purchaseDTO.getPostId()) !=null){
             purchaseRedisTemplate.delete("purchase::purchases_" + purchaseDTO.getPostId());
         }
-        if(redisTemplate.opsForValue().get("gifts") !=null){
-            redisTemplate.delete("gifts");
-        }
         return purchaseDTO;
     }
 
     @Override
-//    @CacheEvict(value = "purchases", key = "'purchases_' + #id")
     public void softDelete(Long id) {
         postDAO.updatePostStatus(id);
         if(purchaseRedisTemplate.opsForValue().get("purchase::purchases_" + id) !=null){
             purchaseRedisTemplate.delete("purchase::purchases_" + id);
-        }
-        if(redisTemplate.opsForValue().get("gifts") !=null){
-            redisTemplate.delete("gifts");
         }
 
     }
