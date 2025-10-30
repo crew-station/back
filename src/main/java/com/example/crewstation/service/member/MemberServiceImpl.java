@@ -361,7 +361,7 @@ public class MemberServiceImpl implements MemberService {
         log.info("판매 상태 변경 요청: memberId={}, paymentStatusId={}, paymentPhase={}",
                 memberId, paymentStatusId, paymentPhase);
 
-        paymentStatusMapper.updatePaymentStatus(paymentStatusId, paymentPhase);
+        paymentStatusDAO.updatePaymentStatus(paymentStatusId, paymentPhase);
 
         log.info(" 판매 상태가 {} 로 변경되었습니다.", paymentPhase);
     }
